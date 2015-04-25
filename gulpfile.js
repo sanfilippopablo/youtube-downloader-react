@@ -41,7 +41,7 @@ gulp.task('styles', function() {
 });
 
 // SERVE
-gulp.task('serve', function() {
+gulp.task('serve', ['styles', 'scripts'], function() {
   // Start server
   $.nodemon({
     script: 'server/index.js',
