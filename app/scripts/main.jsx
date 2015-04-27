@@ -1,8 +1,8 @@
 var React = require('react');
 var mui = require('material-ui');
-var RaisedButton = mui.RaisedButton;
+var App = require('./components/App.jsx');
 
 React.render(
-  <RaisedButton label="Download" primary={true} />,
-  document.getElementById('example')
+  <App/>,
+  document.getElementById('app')
 );
