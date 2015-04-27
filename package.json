@@ -1,8 +1,12 @@
 {
-  "name": "eventos-cristianos",
+  "name": "youtube-downloader-react",
   "version": "1.0.0",
-  "description": "",
+  "description": "Webapp for downloading Youtube videos and convert them to MP3.",
   "main": "server/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/sanfilippopablo/youtube-downloader-react.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
