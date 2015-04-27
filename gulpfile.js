@@ -1,30 +1,42 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var watchify = require('watchify');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var reactify = require('reactify');
+var assign = require('lodash.assign');
 
 // SCRIPTS
-gulp.task('scripts', function () {
-  // set up the browserify instance on a task basis
-  var b = browserify({
-    entries: './app/scripts/main.jsx',
-    debug: true,
-    // defining transforms here will avoid crashing your stream
-    transform: [reactify]
-  });
 
+var browserifyOpts = {
+  entries: './app/scripts/main.jsx',
+  debug: true,
+  // defining transforms here will avoid crashing your stream
+  transform: [reactify]
+};
+
+var opts = assign({}, watchify.args, browserifyOpts);
+var b = watchify(browserify(opts));
+
+gulp.task('scripts', bundle);
+//b.on('update', bundle); // Watch and rebuild on changes
+b.on('log', $.util.log); // output build logs to terminal
+
+function bundle() {
   return b.bundle()
+    // log errors if they happen
+    .on('error', $.util.log.bind($.util, 'Browserify Error'))
     .pipe(source('app.js'))
+    // optional, remove if you don't need to buffer file contents
     .pipe(buffer())
-    .pipe($.sourcemaps.init({loadMaps: true}))
-        // Add transformation tasks to the pipeline here.
-        .pipe($.uglify())
-        .on('error', $.util.log)
-    .pipe($.sourcemaps.write('./'))
+    // optional, remove if you dont want sourcemaps
+    .pipe($.sourcemaps.init({loadMaps: true})) // loads map from browserify file
+    // Add transformation tasks to the pipeline here.
+    .pipe($.sourcemaps.write('./')) // writes .map file
     .pipe(gulp.dest('./.tmp/scripts/'));
-});
+}
+
 
 // STYLES
 gulp.task('styles', function() {
