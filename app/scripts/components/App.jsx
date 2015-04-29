@@ -1,6 +1,7 @@
 var React = require('react');
 var mui = require('material-ui');
 var DownloadsList = require('./DownloadsList.jsx');
+var DownloadForm = require('./DownloadForm.jsx');
 
 var App = React.createClass({
   render: function(){
@@ -26,7 +27,10 @@ var App = React.createClass({
     });
 
     return (
+      <div>
+        <DownloadForm></DownloadForm>
         <DownloadsList downloads={ds}></DownloadsList>
+      </div>
     )
   }
 })
