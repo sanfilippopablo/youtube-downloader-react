@@ -26,7 +26,7 @@ var DownloadForm = React.createClass({
 
   render: function(){
     return (
-      <form onSubmit={this.handleDownload}>
+      <form onSubmit={this.handleDownload} className="download-form">
         <div>
           <mui.TextField  hintText="URL" onChange={this.handleURLChange} />
         </div>

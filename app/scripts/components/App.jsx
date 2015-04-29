@@ -28,8 +28,11 @@ var App = React.createClass({
 
     return (
       <div>
+        <mui.AppBar title="Youtube MP3 Downloader" showMenuIconButton={false}></mui.AppBar>
+        <div className="main-section">
         <DownloadForm></DownloadForm>
         <DownloadsList downloads={ds}></DownloadsList>
+        </div>
       </div>
     )
   }

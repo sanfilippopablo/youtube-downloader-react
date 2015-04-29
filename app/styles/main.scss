@@ -7,6 +7,11 @@
 .downloads-list {
   background-color: #eee;
   padding: 20px;
+  flex: 1
+}
+
+.download-form {
+  flex: 1
 }
 
 .downloadcard {
@@ -17,4 +22,8 @@
 
 .downloadcard-autortitulo {
   font-size: 1.4em;
+}
+
+.main-section {
+  display: flex,
 }
