@@ -1,6 +1,6 @@
 var io = require('socket.io-client');
-var EventEmmiter = require('events').EventEmmiter;
-var api = new EventEmmiter();
+var EventEmitter = require('events').EventEmitter;
+var api = new EventEmitter();
 
 api.socket = io();
 
