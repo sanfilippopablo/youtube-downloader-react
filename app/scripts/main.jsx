@@ -6,3 +6,5 @@ React.render(
   <App />,
   document.getElementById('app')
 );
+
+var api = require('./utils/Api');
