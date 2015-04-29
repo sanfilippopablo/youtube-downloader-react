@@ -23,10 +23,6 @@ io.on('connection', function(socket){
         socket.emit('statusUpdate', data);
     })
 
-    downloading.on('end', function(data) {
-      socket.emit('statusUpdate', data);
-    })
-
   })
 })
 
