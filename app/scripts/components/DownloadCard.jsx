@@ -1,5 +1,6 @@
 var React = require('react');
 var mui = require('material-ui');
+var ProgressBar = require('./ProgressBar.jsx')
 
 var DownloadCard = React.createClass({
   render: function(){
@@ -8,6 +9,7 @@ var DownloadCard = React.createClass({
         <h3 className="downloadcard-autortitulo">{this.props.download.author} - {this.props.download.title}</h3>
         <div className="downloadcard-estado">{this.props.download.status}</div>
         <div className="downloadcard-statusbar">{this.props.download.percent}</div>
+        <ProgressBar percent={this.props.download.percent}></ProgressBar>
       </mui.Paper>
     )
   }

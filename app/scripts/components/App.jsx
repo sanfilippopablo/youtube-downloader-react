@@ -30,8 +30,8 @@ var App = React.createClass({
       <div>
         <mui.AppBar title="Youtube MP3 Downloader" showMenuIconButton={false}></mui.AppBar>
         <div className="main-section">
-        <DownloadForm></DownloadForm>
-        <DownloadsList downloads={ds}></DownloadsList>
+          <DownloadForm></DownloadForm>
+          <DownloadsList downloads={ds}></DownloadsList>
         </div>
       </div>
     )
