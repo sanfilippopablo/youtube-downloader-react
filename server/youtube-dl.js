@@ -14,7 +14,7 @@ var download = function(url, path) {
     if (response.indexOf('[youtube]') != -1) {
       // Preprocessing
       var data = {
-        'url': url,
+        'URL': url,
         'status': 'preprocessing',
         'details': response.slice(10)
       }
@@ -23,7 +23,7 @@ var download = function(url, path) {
       // Downloading
       var info = downloadRegex.exec(response);
       var data = {
-        'url': url,
+        'URL': url,
         'status': 'downloading',
         'details': {
           'percent': info[1],
@@ -35,7 +35,7 @@ var download = function(url, path) {
     } else if (response.indexOf('[ffmpeg]') != -1) {
       //Postprocessing
       var data = {
-        'url': url,
+        'URL': url,
         'status': 'postprocessing',
         'details': 'Converting to MP3'
       }
@@ -46,7 +46,7 @@ var download = function(url, path) {
 
   proc.on('close', function(){
     var data = {
-      'url': url,
+      'URL': url,
       'status': 'complete'
     }
     eventEmitter.emit('data', data);

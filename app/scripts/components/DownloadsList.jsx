@@ -23,7 +23,7 @@ var DownloadsList = React.createClass({
 
   render: function(){
     var downloadItems = this.state.downloads.map(function(download){
-      return <DownloadCard download={download} key={download.author + download.title}></DownloadCard>
+      return <DownloadCard download={download} key={download.URL}></DownloadCard>
     });
     return (
       <div className="downloads-list">

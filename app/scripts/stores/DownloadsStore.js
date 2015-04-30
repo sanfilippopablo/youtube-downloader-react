@@ -5,27 +5,9 @@ var DownloadActions = require('../actions/DownloadActions');
 function DownloadsStore() {
   this.downloads = [];
 
-  this.downloads.push({
-    'author': 'El autor',
-    'title': 'Un titulo',
-    'status': 'downloading',
-    'percent': 45
-  });
-  this.downloads.push({
-    'author': 'Otro autor',
-    'title': 'Y otro titulo',
-    'status': 'downloading',
-    'percent': 12
-  });
-  this.downloads.push({
-    'author': 'El mismo autor',
-    'title': 'pero otro titulo',
-    'status': 'postprocessing',
-    'percent': 95
-  });
-
   this.bindListeners({
-    handleDownload: DownloadActions.DOWNLOAD
+    handleDownload: DownloadActions.DOWNLOAD,
+    handleStatusUpdate: DownloadActions.UPDATE_DOWNLOAD
   });
 }
 
@@ -33,12 +15,25 @@ DownloadsStore.prototype.handleDownload = function (d) {
 
   var defParams = {
     'status': 'preprocessing',
-    'details': 'Sending to server'
+    'details': {
+      'percent': 0
+    }
   }
   var d = _.assign(d, defParams);
   this.downloads.push(d);
 }
 
-DownloadStore.prototype.handleStatusUpdate = function()
+DownloadsStore.prototype.handleStatusUpdate = function(status) {
+  console.log(this.downloads);
+  console.log(status);
+  for (var i = 0; i < this.downloads.length; i++) {
+    if (this.downloads[i].URL === status.URL) {
+      this.downloads[i] = _.assign(this.downloads[i], status);
+      console.log('After update: ', this.downloads);
+    } else {
+
+    }
+  }
+}
 
 module.exports = alt.createStore(DownloadsStore, 'DownloadsStore');

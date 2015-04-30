@@ -12,8 +12,6 @@ api.socket.on('disconnect', function(){
 
 });
 
-api.socket.on('statusUpdate', function(data){console.log(data)})
-
 // data = {author: '', title: '', url: ''}
 api.download = function(data) {
   this.socket.emit('download', data);
