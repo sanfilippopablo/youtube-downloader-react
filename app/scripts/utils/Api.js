@@ -5,16 +5,18 @@ var api = new EventEmitter();
 api.socket = io();
 
 api.socket.on('connect', function(){
-  console.log('socket connected');
+
 })
 
 api.socket.on('disconnect', function(){
-  console.log('socket disconnected');
+
 });
+
+api.socket.on('statusUpdate', function(data){console.log(data)})
 
 // data = {author: '', title: '', url: ''}
 api.download = function(data) {
-  this.socket.emit(data);
+  this.socket.emit('download', data);
 }
 
 api.addStatusUpdateListener = function(callback) {

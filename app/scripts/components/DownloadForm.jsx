@@ -1,5 +1,6 @@
 var React = require('react');
 var mui = require('material-ui');
+var DownloadActions = require('../actions/DownloadActions.js');
 
 var DownloadForm = React.createClass({
   getInitialState: function(){
@@ -20,7 +21,8 @@ var DownloadForm = React.createClass({
 
   handleDownload: function(e) {
     e.preventDefault();
-    console.log(this.state);
+    this.setState(this.getInitialState());
+    DownloadActions.download(this.state);
   },
 
 
@@ -28,13 +30,13 @@ var DownloadForm = React.createClass({
     return (
       <form onSubmit={this.handleDownload} className="download-form">
         <div>
-          <mui.TextField  hintText="URL" onChange={this.handleURLChange} />
+          <mui.TextField  hintText="URL" value={this.state.URL} onChange={this.handleURLChange} />
         </div>
         <div>
-          <mui.TextField hintText="Autor" onChange={this.handleAuthorChange} />
+          <mui.TextField hintText="Autor" value={this.state.author} onChange={this.handleAuthorChange} />
         </div>
         <div>
-          <mui.TextField hintText="Título" onChange={this.handleTitleChange} />
+          <mui.TextField hintText="Título" value={this.state.title} onChange={this.handleTitleChange} />
         </div>
         <div>
           <mui.RaisedButton label="Descargar" primary={true} />

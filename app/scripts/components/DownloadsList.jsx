@@ -17,7 +17,8 @@ var DownloadsList = React.createClass({
   },
 
   onChange: function(state) {
-    this.state = state;
+
+    this.setState(state);
   },
 
   render: function(){

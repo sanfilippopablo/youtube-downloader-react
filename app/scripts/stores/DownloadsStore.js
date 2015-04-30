@@ -8,19 +8,19 @@ function DownloadsStore() {
   this.downloads.push({
     'author': 'El autor',
     'title': 'Un titulo',
-    'status': 'Descargando el video',
+    'status': 'downloading',
     'percent': 45
   });
   this.downloads.push({
     'author': 'Otro autor',
     'title': 'Y otro titulo',
-    'status': 'Descargando el video',
+    'status': 'downloading',
     'percent': 12
   });
   this.downloads.push({
     'author': 'El mismo autor',
     'title': 'pero otro titulo',
-    'status': 'Descargando el video',
+    'status': 'postprocessing',
     'percent': 95
   });
 
@@ -30,6 +30,7 @@ function DownloadsStore() {
 }
 
 DownloadsStore.prototype.handleDownload = function (d) {
+
   var defParams = {
     'status': 'preprocessing',
     'details': 'Sending to server'
@@ -37,5 +38,7 @@ DownloadsStore.prototype.handleDownload = function (d) {
   var d = _.assign(d, defParams);
   this.downloads.push(d);
 }
+
+DownloadStore.prototype.handleStatusUpdate = function()
 
 module.exports = alt.createStore(DownloadsStore, 'DownloadsStore');

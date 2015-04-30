@@ -2,6 +2,7 @@ var EventEmitter = require('events').EventEmitter;
 var spawn = require('child_process').spawn;
 
 var download = function(url, path) {
+  console.log('Downloading')
   var downloadRegex = /\[download\]\s{1,3}(\d{1,3}\.\d)% of .* at (.*) ETA (\d{2}:\d{2})/;
   var eventEmitter = new EventEmitter();
   command = 'youtube-dl';

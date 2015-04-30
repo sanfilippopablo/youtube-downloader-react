@@ -1,4 +1,5 @@
 var pathutils = require('path');
+var download = require('./youtube-dl.js');
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -8,16 +9,17 @@ var io = require('socket.io')(server);
 app.use(express.static(pathutils.join(__dirname, '../.tmp')));
 app.use(express.static(pathutils.join(__dirname, '../app')));
 
+var download_path = '/home/pablo/Downloads/'
+
 // IO
 io.on('connection', function(socket){
-
   socket.on('download', function(data){
 
     // Generate download path
-    var path = pathutils.join(download_path, data.autor, data.titulo) + '.%(ext)s';
+    var path = pathutils.join(download_path, data.author, data.title) + '.%(ext)s';
 
     // Download
-    var downloading = download(data['url'], path);
+    var downloading = download(data['URL'], path);
 
     downloading.on('data', function(data) {
         socket.emit('statusUpdate', data);
