@@ -1,7 +1,7 @@
 @import "../../node_modules/material-ui-sass/material-ui";
 
 .toolbar {
-  background-color: $cyan-500;
+  background-color: $blue-500;
 }
 
 .downloads-list {
@@ -10,8 +10,9 @@
   flex: 1
 }
 
-.download-form {
-  flex: 1
+.download-form-container {
+  flex: 1;
+  text-align: center;
 }
 
 .downloadcard {
@@ -25,5 +26,6 @@
 }
 
 .main-section {
-  display: flex,
+  display: flex;
+  width: 100%;
 }

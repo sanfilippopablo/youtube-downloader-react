@@ -22,12 +22,19 @@ var DownloadsList = React.createClass({
   },
 
   render: function(){
-    var downloadItems = this.state.downloads.map(function(download){
-      return <DownloadCard download={download} key={download.URL}></DownloadCard>
-    });
+  var downloadListContent;
+    if (this.state.downloads.length != 0) {
+downloadListContent = this.state.downloads.map(function(download){
+  return <DownloadCard download={download} key={download.URL}></DownloadCard>
+});
+}
+else {
+downloadListContent = <div className="no-downloads-message">No hay descargas en este momento.</div>
+}
+
     return (
       <div className="downloads-list">
-        {downloadItems}
+        {downloadListContent}
       </div>
     )
   }

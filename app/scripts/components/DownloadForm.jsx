@@ -28,6 +28,7 @@ var DownloadForm = React.createClass({
 
   render: function(){
     return (
+    <div className="download-form-container">
       <form onSubmit={this.handleDownload} className="download-form">
         <div>
           <mui.TextField  hintText="URL" value={this.state.URL} onChange={this.handleURLChange} />
@@ -42,6 +43,7 @@ var DownloadForm = React.createClass({
           <mui.RaisedButton label="Descargar" primary={true} />
         </div>
       </form>
+      </div>
     )
   }
 })
