@@ -16,6 +16,7 @@
     "alt": "^0.15.6",
     "browserify": "^9.0.8",
     "express": "^4.12.3",
+    "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-load-plugins": "^0.10.0",
     "gulp-nodemon": "^2.0.2",

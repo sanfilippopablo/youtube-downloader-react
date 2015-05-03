@@ -1,7 +1,7 @@
 @import "../../node_modules/material-ui-sass/material-ui";
 
 .toolbar {
-  background-color: $blue-500;
+  background-color: $light-blue-500;
 }
 
 .downloads-list {
@@ -28,4 +28,14 @@
 .main-section {
   display: flex;
   width: 100%;
+}
+
+.mui-app-bar-title {
+  margin-bottom: 0;
+}
+
+.no-downloads-message {
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 1.8em;
 }
