@@ -2,6 +2,8 @@ var React = require('react');
 var DownloadsStore = require('../stores/DownloadsStore.js')
 var DownloadCard = require('./DownloadCard.jsx');
 
+require('../../styles/DownloadsList.scss');
+
 var DownloadsList = React.createClass({
 
   getInitialState: function() {

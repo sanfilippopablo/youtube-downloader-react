@@ -1,11 +1,15 @@
-var React = require('react');
+import React from 'react';
 var mui = require('material-ui');
 var DownloadsList = require('./DownloadsList.jsx');
 var DownloadForm = require('./DownloadForm.jsx');
 
-var App = React.createClass({
-  render: function(){
+require('../../../node_modules/material-ui-sass/material-ui.scss');
 
+require('../../styles/App.scss');
+
+class App extends React.Component{
+
+  render() {
     return (
       <div>
         <mui.AppBar title="Youtube MP3 Downloader" showMenuIconButton={false}></mui.AppBar>
@@ -16,6 +20,6 @@ var App = React.createClass({
       </div>
     )
   }
-})
+}
 
-module.exports = App;
+export default App;

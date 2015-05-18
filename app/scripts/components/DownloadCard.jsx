@@ -1,6 +1,8 @@
 var React = require('react');
 var mui = require('material-ui');
-var ProgressBar = require('./ProgressBar.jsx')
+var ProgressBar = require('./ProgressBar.jsx');
+
+require('../../styles/DownloadCard.scss');
 
 var DownloadCard = React.createClass({
   render: function(){

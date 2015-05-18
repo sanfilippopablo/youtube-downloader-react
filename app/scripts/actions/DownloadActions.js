@@ -12,7 +12,8 @@ DownloadActions.prototype.updateDownload = function(statusData) {
   this.dispatch(statusData);
 }
 
-module.exports = da = alt.createActions(DownloadActions);
+var da = alt.createActions(DownloadActions);
+module.exports = da;
 
 // Register updateDownload action callback in Api
 api.addStatusUpdateListener(da.updateDownload)

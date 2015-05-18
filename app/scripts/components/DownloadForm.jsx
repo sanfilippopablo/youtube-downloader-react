@@ -2,6 +2,8 @@ var React = require('react');
 var mui = require('material-ui');
 var DownloadActions = require('../actions/DownloadActions.js');
 
+require('../../styles/DownloadForm.scss');
+
 var DownloadForm = React.createClass({
   getInitialState: function(){
     return {URL: '', author: '', title: ''}
