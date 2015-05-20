@@ -11,13 +11,10 @@ class App extends React.Component{
 
   render() {
     return (
-      <div>
-        <mui.AppBar title="Youtube MP3 Downloader" showMenuIconButton={false}></mui.AppBar>
         <div className="main-section">
           <DownloadForm></DownloadForm>
           <DownloadsList></DownloadsList>
         </div>
-      </div>
     )
   }
 }
