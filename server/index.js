@@ -7,7 +7,6 @@ var io = require('socket.io')(server);
 
 // Serve static
 app.use(express.static(pathutils.join(__dirname, '../.tmp')));
-app.use(express.static(pathutils.join(__dirname, '../app')));
 
 var download_path = '/home/pablo/Downloads/'
 
