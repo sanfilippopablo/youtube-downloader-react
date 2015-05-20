@@ -1,5 +1,5 @@
 import React from 'react';
-var mui = require('material-ui');
+import AppBar from './AppBar.jsx';
 var DownloadsList = require('./DownloadsList.jsx');
 var DownloadForm = require('./DownloadForm.jsx');
 
@@ -11,10 +11,13 @@ class App extends React.Component{
 
   render() {
     return (
+      <div>
+        <AppBar title="Youtube MP3 Downloader"></AppBar>
         <div className="main-section">
           <DownloadForm></DownloadForm>
           <DownloadsList></DownloadsList>
         </div>
+      </div>
     )
   }
 }
