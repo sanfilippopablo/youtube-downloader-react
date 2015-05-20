@@ -35,10 +35,10 @@ var DownloadForm = React.createClass({
             <input type="text" placeholder="URL" value={this.state.URL} onChange={this.handleURLChange} />
           </div>
         <div className="field">
-          <input type="text" placeholder="" value={this.state.author} onChange={this.handleAuthorChange} />
+          <input type="text" placeholder="Autor" value={this.state.author} onChange={this.handleAuthorChange} />
         </div>
         <div className="field">
-          <input type="text" placeholder="" value={this.state.title} onChange={this.handleTitleChange} />
+          <input type="text" placeholder="Título" value={this.state.title} onChange={this.handleTitleChange} />
         </div>
         <div className="field">
           <button className="ui button primary">Descargar</button>
