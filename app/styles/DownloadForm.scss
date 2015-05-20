@@ -1,4 +1,11 @@
 .download-form-container {
+  padding: 3em;
   flex: 1;
   text-align: center;
+}
+
+.download-form-container .field {
+  margin: auto;
+  width: 80%;
+  min-width: 100px;
 }
