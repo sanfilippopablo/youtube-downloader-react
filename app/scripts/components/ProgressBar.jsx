@@ -1,20 +1,17 @@
 var React = require('react');
 
 var ProgressBar = React.createClass({
+
+  componentDidMount: function(){
+    $(React.findDOMNode(this)).progress();
+  },
+
   render: function(){
-    var outterStyle = {
-      "width": "100%",
-      "height": "8px",
-      "background-color": "#eee"
-    };
-    var innerStyle = {
-      "background-color": "aqua",
-      "height": "8px",
-      "width": this.props.percent + "%"
-    };
+
     return (
-      <div style={outterStyle}>
-        <div style={innerStyle}></div>
+      <div className="ui teal progress" data-percent={this.props.percent}>
+        <div className="bar"></div>
+        <div className="label">{this.props.percent}% Downloaded</div>
       </div>
     );
   }
