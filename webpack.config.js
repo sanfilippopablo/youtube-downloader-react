@@ -7,12 +7,20 @@ module.exports = {
   },
   module: {
     loaders: [{
+      test: /\.css$/,
+      loader: "style!css"
+    }, {
       test: /\.scss$/,
       loader: "style!css!sass"
     }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel'
+    },
+    {
+      test: /\.svg|\.png|\.ttf|\.woff|\.eot|\.woff2$/,
+      loader: 'file'
     }]
-  }
+  },
+  plugins: []
 };
