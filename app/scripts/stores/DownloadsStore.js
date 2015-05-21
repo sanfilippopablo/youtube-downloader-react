@@ -24,12 +24,9 @@ DownloadsStore.prototype.handleDownload = function (d) {
 }
 
 DownloadsStore.prototype.handleStatusUpdate = function(status) {
-  console.log(this.downloads);
-  console.log(status);
   for (var i = 0; i < this.downloads.length; i++) {
     if (this.downloads[i].URL === status.URL) {
       this.downloads[i] = _.assign(this.downloads[i], status);
-      console.log('After update: ', this.downloads);
     } else {
 
     }
