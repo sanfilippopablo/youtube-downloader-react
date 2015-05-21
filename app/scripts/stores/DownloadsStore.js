@@ -24,12 +24,15 @@ DownloadsStore.prototype.handleDownload = function (d) {
 }
 
 DownloadsStore.prototype.handleStatusUpdate = function(status) {
+  var found = false;
   for (var i = 0; i < this.downloads.length; i++) {
     if (this.downloads[i].URL === status.URL) {
       this.downloads[i] = _.assign(this.downloads[i], status);
-    } else {
-
+      found = true;
     }
+  }
+  if (!found) {
+    this.downloads.push(status);
   }
 }
 
