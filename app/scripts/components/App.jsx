@@ -3,8 +3,6 @@ import AppBar from './AppBar.jsx';
 var DownloadsList = require('./DownloadsList.jsx');
 var DownloadForm = require('./DownloadForm.jsx');
 
-require('../../../node_modules/material-ui-sass/material-ui.scss');
-
 require('../../styles/App.scss');
 
 class App extends React.Component{
