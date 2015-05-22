@@ -7,13 +7,11 @@ var io = require('socket.io')(server);
 var _ = require('lodash');
 
 var config = require('./config')[process.env.NODE_ENV];
-
+var download_path = require('./configuration.json')['download_path'];
 var CurrentDownloads = require('./CurrentDownloads');
 
 // Serve static
 app.use(express.static(config.public_folder));
-
-var download_path = '/home/pablo/Downloads/'
 
 // IO
 io.on('connection', function(socket){
