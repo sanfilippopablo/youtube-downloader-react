@@ -6,33 +6,12 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var _ = require('lodash');
 
-var CurrentDownloads = {
-  _downloads: [],
+var config = require('./config')[process.env.NODE_ENV];
 
-  add: function(download) {
-    this._downloads.push(download);
-  },
-
-  all: function() {
-    return this._downloads;
-  },
-
-  remove: function(objToRemove) {
-    _.remove(this._downloads, function(obj){
-      return obj.URL === objToRemove.URL;
-    });
-  },
-
-  update: function(newObj) {
-    var d = _.find(this._downloads, function(obj){
-      return obj.URL === newObj.URL;
-    });
-    _.merge(d, newObj);
-  }
-}
+var CurrentDownloads = require('./CurrentDownloads');
 
 // Serve static
-app.use(express.static(pathutils.join(__dirname, '../.tmp')));
+app.use(express.static(config.public_folder));
 
 var download_path = '/home/pablo/Downloads/'
 
