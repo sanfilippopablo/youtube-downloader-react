@@ -11,3 +11,12 @@
 .DownloadCard-progressbar {
   margin-top: 1em;
 }
+
+.DownloadCard .info-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.DownloadCard .header {
+  margin-bottom: 0
+}

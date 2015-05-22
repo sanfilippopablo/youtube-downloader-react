@@ -24,6 +24,11 @@ DownloadsStore.prototype.handleDownload = function (d) {
 }
 
 DownloadsStore.prototype.handleStatusUpdate = function(status) {
+  if(status.status !== 'downloading') {
+    status.details.speed = "N/A";
+    status.details.ETA = "N/A";
+  }
+
   var found = false;
   for (var i = 0; i < this.downloads.length; i++) {
     if (this.downloads[i].URL === status.URL) {
