@@ -45,7 +45,7 @@ io.on('connection', function(socket){
 })
 
 // Listening
-server.listen(3001, function () {
+server.listen(config.port, function () {
 
   var host = server.address().address;
   var port = server.address().port;
