@@ -1,15 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 require('../../styles/AppBar.scss');
 
-class AppBar extends React.Component {
-  render() {
-    return (
-      <div className="AppBar-container" style={{backgroundColor: this.props.color}}>
-        <span className="AppBar-title">{this.props.title}</span>
-      </div>
-    )
-  }
+const AppBar = ({color, title}) => {
+  return (
+    <div className="AppBar-container" style={{backgroundColor: color}}>
+      <span className="AppBar-title">{title}</span>
+    </div>
+  )
 }
 
 AppBar.defaultProps = {color: 'cadetblue'};

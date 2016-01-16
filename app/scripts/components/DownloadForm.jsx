@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react'
 
 require('../../styles/DownloadForm.scss');
 
@@ -49,4 +49,4 @@ var DownloadForm = React.createClass({
   }
 })
 
-module.exports = DownloadForm;
+export default DownloadForm

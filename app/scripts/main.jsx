@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import mainReducer from './reducers/mainReducer'
 import React from 'react'
-import App from './components/App'
+import App from './components/App.jsx'
 import Api from './utils/Api'
 
 // Make jQuery available in the global scope for plugins
