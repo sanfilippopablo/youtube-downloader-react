@@ -1,5 +1,5 @@
 var React = require('react');
-var ProgressBar = require('./ProgressBar.jsx');
+import ProgressBar  from './ProgressBar'
 
 require('../../styles/DownloadCard.scss');
 

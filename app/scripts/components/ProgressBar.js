@@ -1,31 +1,32 @@
-var React = require('react');
-import classnames from 'classnames';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import classnames from 'classnames'
 
-var labels = {
+const labels = {
   'success': 'Descarga completada',
   'error': 'Ocurrió un error en la descarga',
   'downloading': 'Descargando'
 }
 
-var ProgressBar = React.createClass({
+class ProgressBar extends React.Component {
 
-  componentDidMount: function(){
-    $(React.findDOMNode(this)).progress({
+  componentDidMount() {
+    $(ReactDOM.findDOMNode(this)).progress({
       autoSuccess: false,
       percent: this.props.percent
     });
-  },
+  }
 
-  componentDidUpdate: function(){
-    $(React.findDOMNode(this)).progress({
+  componentDidUpdate() {
+    $(ReactDOM.findDOMNode(this)).progress({
       autoSuccess: false,
       percent: this.props.percent
       });
-  },
+  }
 
-  render: function(){
+  render() {
 
-    var label = labels[this.props.status];
+    let label = labels[this.props.status];
 
     return (
       <div className={classnames("ui", "teal", "progress", this.props.className, this.props.status)}>
@@ -36,6 +37,6 @@ var ProgressBar = React.createClass({
       </div>
     );
   }
-})
+}
 
-module.exports = ProgressBar;
+export default ProgressBar

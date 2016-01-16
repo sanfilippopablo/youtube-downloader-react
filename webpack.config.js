@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 module.exports = {
+  devtool: 'source-map',
   entry: "./app/scripts/main.jsx",
   output: {
     filename: "bundle.js"
@@ -13,8 +14,11 @@ module.exports = {
       loader: "style!css!sass"
     }, {
       test: /\.jsx?$/,
+      loader: 'babel-loader',
       exclude: /node_modules/,
-      loader: 'babel'
+        query: {
+          presets: ['es2015', 'react']
+        }
     },
     {
       test: /\.svg|\.png|\.ttf|\.woff|\.eot|\.woff2$/,

@@ -21,4 +21,4 @@ api.addStatusUpdateListener = function(callback) {
   this.socket.on('statusUpdate', callback);
 }
 
-module.exports = api;
+export default api;

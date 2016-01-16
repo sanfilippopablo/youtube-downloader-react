@@ -1,5 +1,4 @@
 var React = require('react');
-var DownloadActions = require('../actions/DownloadActions.js');
 
 require('../../styles/DownloadForm.scss');
 
@@ -22,8 +21,9 @@ var DownloadForm = React.createClass({
 
   handleDownload: function(e) {
     e.preventDefault();
+    let data = this.state;
+    this.props.onFormSubmit(data);
     this.setState(this.getInitialState());
-    DownloadActions.download(this.state);
   },
 
 
