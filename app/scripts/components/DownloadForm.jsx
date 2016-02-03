@@ -1,5 +1,7 @@
 import React from 'react'
 import {reduxForm} from 'redux-form'
+import TextField from 'material-ui/lib/text-field'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 require('../../styles/DownloadForm.scss');
 
@@ -11,18 +13,18 @@ var DownloadForm = React.createClass({
 
     return (
     <div className="download-form-container">
-      <form onSubmit={handleSubmit} className="download-form ui form">
-          <div className="field">
-            <input type="text" placeholder="URL" {...URL} />
-          </div>
+      <form onSubmit={handleSubmit} className="download-form">
         <div className="field">
-          <input type="text" placeholder="Autor" {...author} />
+          <TextField fullWidth={true} floatingLabelText="URL" {...URL} />
         </div>
         <div className="field">
-          <input type="text" placeholder="Título" {...title} />
+          <TextField fullWidth={true} floatingLabelText="Autor" {...author} />
         </div>
         <div className="field">
-          <button className="ui button primary">Descargar</button>
+          <TextField fullWidth={true} floatingLabelText="Título" {...title} />
+        </div>
+        <div className="field">
+          <RaisedButton label="Descargar" type="submit" secondary={true} />
         </div>
       </form>
       </div>

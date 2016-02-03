@@ -1,22 +1,9 @@
 .downloadcard {
-  background-color: white;
   padding: 10px;
   margin-bottom: 10px;
 }
 
-.downloadcard-autortitulo {
-  font-size: 1.4em;
-}
-
-.DownloadCard-progressbar {
-  margin-top: 1em;
-}
-
-.DownloadCard .info-wrapper {
+.downloadcard .info-wrapper {
   display: flex;
   justify-content: space-between;
-}
-
-.DownloadCard .header {
-  margin-bottom: 0
 }

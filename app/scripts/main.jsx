@@ -8,14 +8,6 @@ import React from 'react'
 import App from './components/App.jsx'
 import Api from './utils/Api'
 
-// Make jQuery available in the global scope for plugins
-var $ = require('jquery');
-window.jQuery = $;
-window.$ = $;
-
-require('../semantic-ui/semantic.js');
-require('../semantic-ui/semantic.css');
-
 const reducers = {
   downloads: downloadsReducer,
   form: formReducer
