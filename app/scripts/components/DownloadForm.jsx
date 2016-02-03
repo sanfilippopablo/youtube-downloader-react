@@ -1,44 +1,25 @@
 import React from 'react'
+import {reduxForm} from 'redux-form'
 
 require('../../styles/DownloadForm.scss');
 
 var DownloadForm = React.createClass({
-  getInitialState: function(){
-    return {URL: '', author: '', title: ''}
-  },
-
-  handleURLChange: function(e) {
-    this.setState({URL: e.target.value})
-  },
-
-  handleAuthorChange: function(e) {
-    this.setState({author: e.target.value})
-  },
-
-  handleTitleChange: function(e) {
-    this.setState({title: e.target.value})
-  },
-
-  handleDownload: function(e) {
-    e.preventDefault();
-    let data = this.state;
-    this.props.onFormSubmit(data);
-    this.setState(this.getInitialState());
-  },
-
 
   render: function(){
+
+    const {fields: {URL, author, title}, handleSubmit} = this.props;
+
     return (
     <div className="download-form-container">
-      <form onSubmit={this.handleDownload} className="download-form ui form">
+      <form onSubmit={handleSubmit} className="download-form ui form">
           <div className="field">
-            <input type="text" placeholder="URL" value={this.state.URL} onChange={this.handleURLChange} />
+            <input type="text" placeholder="URL" {...URL} />
           </div>
         <div className="field">
-          <input type="text" placeholder="Autor" value={this.state.author} onChange={this.handleAuthorChange} />
+          <input type="text" placeholder="Autor" {...author} />
         </div>
         <div className="field">
-          <input type="text" placeholder="Título" value={this.state.title} onChange={this.handleTitleChange} />
+          <input type="text" placeholder="Título" {...title} />
         </div>
         <div className="field">
           <button className="ui button primary">Descargar</button>
@@ -48,5 +29,10 @@ var DownloadForm = React.createClass({
     )
   }
 })
+
+DownloadForm = reduxForm({
+  form: 'download',
+  fields: ['URL', 'author', 'title']
+})(DownloadForm);
 
 export default DownloadForm

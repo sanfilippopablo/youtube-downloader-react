@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import downloadsReducer from './reducers/downloadsReducer'
+import {reducer as formReducer} from 'redux-form';
 import React from 'react'
 import App from './components/App.jsx'
 import Api from './utils/Api'
@@ -16,7 +17,8 @@ require('../semantic-ui/semantic.js');
 require('../semantic-ui/semantic.css');
 
 const reducers = {
-  downloads: downloadsReducer
+  downloads: downloadsReducer,
+  form: formReducer
 }
 const mainReducer = combineReducers(reducers);
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);

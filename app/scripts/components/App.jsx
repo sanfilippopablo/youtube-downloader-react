@@ -13,7 +13,7 @@ const App = ({dispatch, downloads}) => {
     <div className="App-container">
       <AppBar title="Youtube MP3 Downloader"></AppBar>
       <div className="main-section">
-        <DownloadForm onFormSubmit={data => dispatch(download(data))}></DownloadForm>
+        <DownloadForm onSubmit={data => dispatch(download(data))}></DownloadForm>
         <DownloadsList downloads={downloads}></DownloadsList>
       </div>
     </div>

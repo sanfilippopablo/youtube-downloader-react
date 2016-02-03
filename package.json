@@ -41,6 +41,7 @@
     "react-tap-event-plugin": "latest",
     "reactify": "latest",
     "redux": "^3.0.5",
+    "redux-form": "^4.1.6",
     "redux-thunk": "^1.0.3",
     "sass-loader": "latest",
     "socket.io": "latest",
@@ -50,5 +51,8 @@
     "vinyl-source-stream": "latest",
     "watchify": "latest",
     "webpack": "^1.12.11"
+  },
+  "devDependencies": {
+    "redux-devtools": "^3.1.0"
   }
 }
