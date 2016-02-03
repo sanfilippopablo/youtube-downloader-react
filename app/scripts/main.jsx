@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import ReactDOM from 'react-dom'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
-import mainReducer from './reducers/mainReducer'
+import downloadsReducer from './reducers/downloadsReducer'
 import React from 'react'
 import App from './components/App.jsx'
 import Api from './utils/Api'
@@ -15,8 +15,11 @@ window.$ = $;
 require('../semantic-ui/semantic.js');
 require('../semantic-ui/semantic.css');
 
+const reducers = {
+  downloads: downloadsReducer
+}
+const mainReducer = combineReducers(reducers);
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
-
 let store = createStoreWithMiddleware(mainReducer);
 
 Api.addStatusUpdateListener((payload) => {

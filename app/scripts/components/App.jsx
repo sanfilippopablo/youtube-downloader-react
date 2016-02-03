@@ -14,14 +14,14 @@ const App = ({dispatch, downloads}) => {
       <AppBar title="Youtube MP3 Downloader"></AppBar>
       <div className="main-section">
         <DownloadForm onFormSubmit={data => dispatch(download(data))}></DownloadForm>
-        <DownloadsList downloads={downloads}></DownloadsList>
+        <DownloadsList downloads={downloads.downloads}></DownloadsList>
       </div>
     </div>
   )
 }
 
 App.propTypes = {
-  downloads: React.PropTypes.array.isRequired
+  downloads: React.PropTypes.object.isRequired
 }
 
 export default connect(state => state)(App)
