@@ -1,23 +1,10 @@
 import React from 'react'
 import ProgressBar  from './ProgressBar.jsx'
+import LinearProgress from 'material-ui/lib/linear-progress'
 
 require('../../styles/DownloadCard.scss');
 
 const DownloadCard = (props) => {
-
-  let status;
-  if (['preprocessing', 'downloading', 'postprocessing'].indexOf(props.download.status) !== -1) {
-    status = 'active';
-  }
-  else
-  if (props.download.status === 'complete'){
-    status = 'success'
-  }
-  else {
-    // 'error'
-    status = props.download.status
-  }
-
   return (
     <div className="DownloadCard ui card fluid">
       <div className="content">
@@ -31,7 +18,7 @@ const DownloadCard = (props) => {
               <div><strong>Tiempo restante estimado:</strong> {props.download.details.ETA}</div>
           </div>
         </div>
-        <ProgressBar className="DownloadCard-progressbar" status={status} percent={props.download.details.percent}></ProgressBar>
+        <LinearProgress mode="determinate" value={props.download.details.percent} />
       </div>
     </div>
   )

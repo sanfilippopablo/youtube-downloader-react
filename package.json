@@ -33,7 +33,7 @@
     "jquery": "latest",
     "lodash": "latest",
     "lodash.assign": "latest",
-    "material-ui": "latest",
+    "material-ui": "^0.14.4",
     "material-ui-sass": "latest",
     "node-sass": "latest",
     "react": "latest",
