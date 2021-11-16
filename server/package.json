@@ -15,7 +15,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch src --exec esr src/index.ts"
+    "start": "nodemon --watch src --exec esr src/index.ts",
+    "prod": "esr src/index.ts"
   },
   "keywords": [],
   "author": "",
