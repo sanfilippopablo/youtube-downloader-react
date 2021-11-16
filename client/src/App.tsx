@@ -4,8 +4,7 @@ function useWebSocket() {
   const ws = useRef<WebSocket | null>(null);
   useEffect(() => {
     ws.current = new WebSocket("ws://localhost:3001");
-    ws.current.addEventListener("open", () => console.log("Opened"));
-    ws.current.addEventListener("message", (message) => console.log(message));
+    ws.current.addEventListener("open", () => console.log("Connected"));
 
     return () => ws.current!.close();
   }, []);
@@ -103,10 +102,7 @@ function App() {
     }
   }, [ws]);
 
-  console.log({ downloads });
-
   function download() {
-    console.log(`Sending ${JSON.stringify({ url, artist, title })}`);
     ws!.send(
       JSON.stringify({
         url: url.value,
