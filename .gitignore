@@ -1,5 +1,0 @@
-node_modules
-app/bundle.js
-build
-.tmp
-server/configuration.json
