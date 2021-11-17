@@ -4,6 +4,8 @@ import http from "http";
 import { download } from "./download";
 import path from "path";
 
+const PORT = process.env.PORT ?? 3001;
+
 const app = express();
 const server = http.createServer(app);
 
@@ -27,4 +29,4 @@ wss.on("connection", function connection(ws) {
   });
 });
 
-server.listen(3001, () => console.log("Listening at 3001"));
+server.listen(PORT, () => console.log(`Listening at ${PORT}`));

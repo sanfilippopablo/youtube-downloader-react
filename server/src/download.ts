@@ -3,7 +3,7 @@ import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 
-const command = "youtube-dl";
+const DOWNLOAD_PATH = process.env.DOWNLOAD_PATH ?? "/tmp";
 
 type DownloadArgs = {
   url: string;
@@ -12,7 +12,7 @@ type DownloadArgs = {
 };
 export function download({ url, artist, title }: DownloadArgs): EventEmitter {
   console.log("Downloading");
-  const downloadPath = `/Users/pablo/Downloads/${artist}/${title}.%(ext)s`;
+  const downloadPath = path.join(DOWNLOAD_PATH, artist, `${title}.%(ext)s`);
   fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
   const downloadRegex = /\[download\]\s{1,3}(\d{1,3}\.\d)% of .* at (.*) ETA (\d{2}:\d{2})/;
   const eventEmitter = new EventEmitter();

@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
+const WEBSOCKET_URL = import.meta.env.PROD ? `ws://${window.location.host}` : "ws://localhost:3001";
+
 function useWebSocket() {
   const ws = useRef<WebSocket | null>(null);
   useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:3001");
+    ws.current = new WebSocket(WEBSOCKET_URL);
     ws.current.addEventListener("open", () => console.log("Connected"));
 
     return () => ws.current!.close();
@@ -181,7 +183,7 @@ function App() {
           Descargar
         </button>
       </div>
-      <div className="flex flex-col flex-1 gap-2 p-8 bg-gray-100 overflow-scroll border-l">
+      <div className="flex flex-col flex-1 gap-2 p-8 bg-gray-100 overflow-scroll border-l border-gray-300">
         {[...downloads.values()].map((download) => (
           <DownloadCard key={download.url} download={download} />
         ))}
