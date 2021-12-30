@@ -1,13 +1,33 @@
 <script lang="ts">
+  import * as yup from "yup";
   import DownloadCard from "./DownloadCard.svelte";
   import { downloads } from "./stores";
+  import { DownloadInput } from "./types";
+
+  let schema = yup.object().shape({
+    url: yup.string().url().required(),
+    artist: yup.string().required(),
+    title: yup.string().required(),
+    start: yup.string().matches(/\d\d:\d\d:\d\d/, { excludeEmptyString: true }),
+    end: yup.string().matches(/\d\d:\d\d:\d\d/, { excludeEmptyString: true }),
+  });
 
   let url = "";
   let artist = "";
   let title = "";
+  let start = "";
+  let end = "";
 
-  function download() {
-    downloads.download({ url, artist, title });
+  async function download() {
+    const isValid = await schema.isValid({ url, artist, title, start, end });
+    console.log({ isValid });
+    if (isValid) {
+      const data: DownloadInput = { url, artist, title };
+      if (start || end) {
+        data.cut = { start, end };
+      }
+      downloads.download(data);
+    }
   }
 </script>
 
@@ -54,11 +74,13 @@
           type="text"
           placeholder="Desde"
           class="px-2 py-2 text-sm placeholder-gray-400 text-gray-600 relative bg-white rounded border border-gray-400 outline-none focus:outline-none focus:ring w-24"
+          bind:value={start}
         />
         <input
           type="text"
           placeholder="Hasta"
           class="px-2 py-2 text-sm placeholder-gray-400 text-gray-600 relative bg-white rounded border border-gray-400 outline-none focus:outline-none focus:ring w-24"
+          bind:value={end}
         />
       </div>
     </div>

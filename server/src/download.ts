@@ -9,15 +9,30 @@ type DownloadArgs = {
   url: string;
   artist: string;
   title: string;
+  cut?: {
+    start?: string;
+    end?: string;
+  };
 };
-export function download({ url, artist, title }: DownloadArgs): EventEmitter {
+export function download({ url, artist, title, cut }: DownloadArgs): EventEmitter {
   console.log("Downloading");
   const downloadPath = path.join(DOWNLOAD_PATH, artist, `${title}.%(ext)s`);
   fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
   const downloadRegex = /\[download\]\s{1,3}(\d{1,3}\.\d)% of .* at (.*) ETA (\d{2}:\d{2})/;
   const eventEmitter = new EventEmitter();
   let error = false;
-  let cmd = `youtube-dl -x --audio-format mp3 --postprocessor-args '-metadata title="${title}" -metadata artist="${artist}"' -o '${downloadPath}' ${url}`;
+
+  let postprocessorArgs = `-metadata title="${title}" -metadata artist="${artist}"`;
+
+  if (cut?.start) {
+    postprocessorArgs += ` -ss ${cut?.start}`;
+  }
+
+  if (cut?.end) {
+    postprocessorArgs += ` -to ${cut?.end}`;
+  }
+
+  let cmd = `youtube-dl -x --audio-format mp3 --postprocessor-args '${postprocessorArgs}' -o '${downloadPath}' ${url}`;
   const proc = spawn(cmd, { shell: true });
   proc.stdout.on("data", function (data: Buffer) {
     error = false;
