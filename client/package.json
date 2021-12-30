@@ -1,29 +1,24 @@
 {
-  "name": "youtube-downloader-v12",
+  "name": "youtube-downloader-svelte",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
-    "serve": "vite preview",
-    "server": "ts-node src/server.ts"
-  },
-  "dependencies": {
-    "@types/ws": "^8.2.0",
-    "express": "^4.17.1",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
-    "ts-node": "^10.4.0",
-    "ws": "^8.2.3"
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@vitejs/plugin-react": "^1.0.0",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "@tsconfig/svelte": "^2.0.1",
     "autoprefixer": "^10.4.0",
-    "postcss": "^8.3.11",
-    "tailwindcss": "^2.2.19",
-    "typescript": "^4.3.2",
-    "vite": "^2.6.4"
+    "postcss": "^8.4.5",
+    "svelte": "^3.44.0",
+    "svelte-check": "^2.2.7",
+    "svelte-preprocess": "^4.10.1",
+    "tailwindcss": "^3.0.7",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2"
   }
 }
