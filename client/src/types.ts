@@ -16,7 +16,10 @@ export type CutParameters = {
   end?: string;
 };
 
+export type DownloadType = "musica" | "mensaje";
+
 export type DownloadInput = {
+  downloadType: DownloadType;
   url: string;
   artist: string;
   title: string;

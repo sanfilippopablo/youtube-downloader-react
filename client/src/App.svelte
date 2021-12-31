@@ -1,8 +1,9 @@
 <script lang="ts">
   import * as yup from "yup";
+  import ButtonToggle from "./ButtonToggle.svelte";
   import DownloadCard from "./DownloadCard.svelte";
   import { downloads } from "./stores";
-  import { DownloadInput } from "./types";
+  import { DownloadInput, DownloadType } from "./types";
 
   let schema = yup.object().shape({
     url: yup.string().url().required(),
@@ -12,6 +13,7 @@
     end: yup.string().matches(/\d\d:\d\d:\d\d/, { excludeEmptyString: true }),
   });
 
+  let downloadType: DownloadType = "musica";
   let url = "";
   let artist = "";
   let title = "";
@@ -22,7 +24,7 @@
     const isValid = await schema.isValid({ url, artist, title, start, end });
     console.log({ isValid });
     if (isValid) {
-      const data: DownloadInput = { url, artist, title };
+      const data: DownloadInput = { url, artist, title, downloadType };
       if (start || end) {
         data.cut = { start, end };
       }
@@ -32,20 +34,24 @@
 </script>
 
 <div class="h-screen flex">
-  <div class="flex-1 p-8 gap-16 flex flex-col">
+  <div class="flex-1 p-8 justify-between flex flex-col">
     <div class="flex items-center justify-center">
-      <button
-        class=" border border-blue-500 hover:bg-blue-500 text-white bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-l outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
-        type="button"
+      <ButtonToggle
+        active={downloadType === "musica"}
+        on:click={() => {
+          downloadType = "musica";
+        }}
       >
         Música
-      </button>
-      <button
-        class="text-blue-500 bg-transparent border-t border-b border-r border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-r outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
-        type="button"
+      </ButtonToggle>
+      <ButtonToggle
+        active={downloadType === "mensaje"}
+        on:click={() => {
+          downloadType = "mensaje";
+        }}
       >
         Mensaje
-      </button>
+      </ButtonToggle>
     </div>
     <div class="gap-4 flex flex-col">
       <input
