@@ -3,9 +3,11 @@ import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 
-const DOWNLOAD_PATH = process.env.DOWNLOAD_PATH ?? "/tmp";
+const MUSICA_DOWNLOAD_PATH = process.env.MUSICA_DOWNLOAD_PATH ?? "/tmp";
+const MENSAJES_DOWNLOAD_PATH = process.env.MENSAJES_DOWNLOAD_PATH ?? "/tmp";
 
 type DownloadArgs = {
+  downloadType: "musica" | "mensaje";
   url: string;
   artist: string;
   title: string;
@@ -14,9 +16,13 @@ type DownloadArgs = {
     end?: string;
   };
 };
-export function download({ url, artist, title, cut }: DownloadArgs): EventEmitter {
+export function download({ url, artist, title, cut, downloadType }: DownloadArgs): EventEmitter {
   console.log("Downloading");
-  const downloadPath = path.join(DOWNLOAD_PATH, artist, `${title}.%(ext)s`);
+  const downloadPath = path.join(
+    downloadType === "musica" ? MUSICA_DOWNLOAD_PATH : MENSAJES_DOWNLOAD_PATH,
+    artist,
+    `${title}.%(ext)s`
+  );
   fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
   const downloadRegex = /\[download\]\s{1,3}(\d{1,3}\.\d)% of .* at (.*) ETA (\d{2}:\d{2})/;
   const eventEmitter = new EventEmitter();

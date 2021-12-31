@@ -13,7 +13,8 @@ Using docker in production:
 docker build -t youtube-downloader .
 docker run -d \
     -e PORT=3000 \
-    -e DOWNLOAD_PATH=/downloads \
+    -e MUSICA_DOWNLOAD_PATH=/downloads \
+    -e MENSAJES_DOWNLOAD_PATH=/downloads \
     -p 3000:3000 \
     -v /Users/pablo/Music:/downloads \
     youtube-downloader
