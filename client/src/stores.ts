@@ -1,10 +1,12 @@
 import { writable } from "svelte/store";
 import { DownloadInput, DownloadState } from "./types";
 
+const PORT = import.meta.env.PROD ? 3000 : 3001;
+
 function createDownloads() {
   const { subscribe, update } = writable<Map<string, DownloadState>>(new Map());
 
-  const ws = new WebSocket("ws://localhost:3001");
+  const ws = new WebSocket(`ws://localhost:${PORT}`);
   ws.addEventListener("open", () => console.log("Opened"));
   ws.addEventListener("message", (message) => {
     console.log(message);
