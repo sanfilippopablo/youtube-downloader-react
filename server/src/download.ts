@@ -18,9 +18,12 @@ type DownloadArgs = {
 };
 export function download({ url, artist, title, cut, downloadType }: DownloadArgs): EventEmitter {
   console.log("Downloading");
+
+  const primaryArtist = artist.split(";")[0];
+
   const downloadPath = path.join(
     downloadType === "musica" ? MUSICA_DOWNLOAD_PATH : MENSAJES_DOWNLOAD_PATH,
-    artist,
+    primaryArtist,
     `${title}.%(ext)s`
   );
   fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
