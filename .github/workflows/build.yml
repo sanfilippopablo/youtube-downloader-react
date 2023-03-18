@@ -36,6 +36,7 @@ jobs:
         working-directory: server
       - run: dir server
       - run: dir server/target
+      - run: dir server/target/release
       # - name: Upload a Build Artifact
       #   uses: actions/upload-artifact@v3.1.0
       #   with:
