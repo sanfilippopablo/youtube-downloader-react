@@ -1,25 +1,37 @@
 import { writable } from "svelte/store";
 import { DownloadInput, DownloadState } from "./types";
 
-const PORT = import.meta.env.PROD ? 3000 : 3001;
+const HOST = "localhost:3200";
 
 function createDownloads() {
   const { subscribe, update } = writable<Map<string, DownloadState>>(new Map());
 
-  const ws = new WebSocket(`ws://localhost:${PORT}`);
+  const ws = new WebSocket(`ws://${HOST}/websocket`);
   ws.addEventListener("open", () => console.log("Opened"));
   ws.addEventListener("message", (message) => {
     console.log(message);
     const data = JSON.parse(message.data) as DownloadState;
     update((downloads) => {
+      console.log("Updating downloads");
       downloads.set(data.url, data);
+      console.log("Updated");
+      console.log({ downloads });
       return downloads;
     });
   });
 
   return {
     subscribe,
-    download: (download: DownloadInput) => ws.send(JSON.stringify(download)),
+    download: (download: DownloadInput) => {
+      console.log({ download });
+      fetch(`http://${HOST}/download`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(download),
+      });
+    },
   };
 }
 

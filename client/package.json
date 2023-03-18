@@ -23,6 +23,7 @@
     "vite": "^2.7.2"
   },
   "dependencies": {
+    "ts-pattern": "^4.2.1",
     "yup": "^0.32.11"
   }
 }

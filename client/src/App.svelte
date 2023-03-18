@@ -13,7 +13,7 @@
     end: yup.string().matches(/\d\d:\d\d:\d\d/, { excludeEmptyString: true }),
   });
 
-  let downloadType: DownloadType = "musica";
+  let download_type: DownloadType = "Música";
   let url = "";
   let artist = "";
   let title = "";
@@ -24,30 +24,32 @@
     const isValid = await schema.isValid({ url, artist, title, start, end });
     console.log({ isValid });
     if (isValid) {
-      const data: DownloadInput = { url, artist, title, downloadType };
+      const data: DownloadInput = { url, artist, title, download_type };
       if (start || end) {
         data.cut = { start, end };
       }
       downloads.download(data);
     }
   }
+
+  $: console.log($downloads);
 </script>
 
 <div class="h-screen flex">
   <div class="flex-1 p-8 justify-between flex flex-col">
     <div class="flex items-center justify-center">
       <ButtonToggle
-        active={downloadType === "musica"}
+        active={download_type === "Música"}
         on:click={() => {
-          downloadType = "musica";
+          download_type = "Música";
         }}
       >
         Música
       </ButtonToggle>
       <ButtonToggle
-        active={downloadType === "mensaje"}
+        active={download_type === "Mensaje"}
         on:click={() => {
-          downloadType = "mensaje";
+          download_type = "Mensaje";
         }}
       >
         Mensaje

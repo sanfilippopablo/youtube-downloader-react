@@ -2,13 +2,11 @@ export type DownloadState = {
   url: string;
   artist: string;
   title: string;
-  status: "preprocessing" | "downloading" | "postprocessing" | "complete" | "error";
-  details: {
-    description: string;
-    percent: number;
-    speed: string;
-    ETA: string;
-  };
+  status:
+    | "Preprocessing"
+    | { Downloading: { percent: number; speed: string; ETA: string } }
+    | "Complete"
+    | { Error: string };
 };
 
 export type CutParameters = {
@@ -16,10 +14,10 @@ export type CutParameters = {
   end?: string;
 };
 
-export type DownloadType = "musica" | "mensaje";
+export type DownloadType = "Música" | "Mensaje";
 
 export type DownloadInput = {
-  downloadType: DownloadType;
+  download_type: DownloadType;
   url: string;
   artist: string;
   title: string;
