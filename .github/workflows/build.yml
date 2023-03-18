@@ -40,6 +40,4 @@ jobs:
         uses: actions/upload-artifact@v3.1.0
         with:
           name: app-${{ matrix.platform }}
-          path: |
-            server/target/release/bundle
-            server/target/debug/bundle
+          path: server/target/release/youtube-downloader
