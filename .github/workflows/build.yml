@@ -34,11 +34,13 @@ jobs:
       - run: cd client && npm ci && npm run build
       - run: cargo build --release
         working-directory: server
-      - run: dir server
-      - run: dir server/target
-      - run: dir server/target/release
-      # - name: Upload a Build Artifact
-      #   uses: actions/upload-artifact@v3.1.0
-      #   with:
-      #     name: app-${{ matrix.platform }}
-      #     path: server/target/release/youtube-downloader
+      # - run: dir server
+      # - run: dir server/target
+      # - run: dir server/target/release
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: app-${{ matrix.platform }}
+          path: |
+            server/target/release/youtube-downloader.exe
+            server/target/release/youtube-downloader
