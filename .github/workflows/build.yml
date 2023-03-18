@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-api:
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      matrix:
+        platform: [windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            api/target/
+          key: ${{ runner.os }}-cargo-${{ matrix.platform }}-${{ hashFiles('api/**/Cargo.lock') }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: cd client && npm ci && npm run build
+      - run: cargo build --release
+      # - name: Setup upterm session
+      #   uses: lhotari/action-upterm@v1
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: api-${{ matrix.platform }}
+          path: |
+            api/target/release/bundle
+            api/target/debug/bundle
