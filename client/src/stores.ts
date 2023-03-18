@@ -24,7 +24,7 @@ function createDownloads() {
     subscribe,
     download: (download: DownloadInput) => {
       console.log({ download });
-      fetch(`http://${HOST}/download`, {
+      fetch(`http://${HOST}/api/download`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

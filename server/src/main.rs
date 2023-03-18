@@ -1,13 +1,15 @@
 use axum::{
+    body::{boxed, Full},
     extract::{ws::WebSocket, State, WebSocketUpgrade},
     http::StatusCode,
-    response::IntoResponse,
+    response::{IntoResponse, Response},
     routing::{get, post},
     Json, Router,
 };
-use http::Method;
+use http::{header, Uri};
 use regex::Regex;
 use reqwest::header::USER_AGENT;
+use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 use std::{
     env,
@@ -370,15 +372,16 @@ async fn main() {
 
     // build our application with a route
     let app = Router::new()
-        .route("/download", post(download_handler))
+        .route("/api/download", post(download_handler))
         .route("/websocket", get(websocket_handler))
         .layer(CorsLayer::permissive())
-        .with_state(app_state);
+        .with_state(app_state)
+        .fallback(static_handler);
 
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
     let addr = SocketAddr::from(([127, 0, 0, 1], 3200));
-    tracing::debug!("listening on {}", addr);
+    tracing::info!("listening on {}", addr);
     let _server = axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .await;
@@ -413,4 +416,56 @@ async fn websocket(mut stream: WebSocket, state: AppState) {
                 .ok();
         }
     });
+}
+
+#[derive(RustEmbed)]
+#[folder = "../client/dist"]
+struct Assets;
+
+async fn static_handler(uri: Uri) -> impl IntoResponse {
+    let path = uri.path().trim_start_matches('/');
+
+    if path.is_empty() || path == "index.html" {
+        return index_html().await;
+    };
+
+    match Assets::get(path) {
+        Some(content) => {
+            let body = boxed(Full::from(content.data));
+            let mime = mime_guess::from_path(path).first_or_octet_stream();
+
+            Response::builder()
+                .header(header::CONTENT_TYPE, mime.as_ref())
+                .body(body)
+                .unwrap()
+        }
+        None => {
+            if path.contains('.') {
+                return not_found().await;
+            }
+
+            index_html().await
+        }
+    }
+}
+
+async fn index_html() -> Response {
+    match Assets::get("index.html") {
+        Some(content) => {
+            let body = boxed(Full::from(content.data));
+
+            Response::builder()
+                .header(header::CONTENT_TYPE, "text/html")
+                .body(body)
+                .unwrap()
+        }
+        None => not_found().await,
+    }
+}
+
+async fn not_found() -> Response {
+    Response::builder()
+        .status(StatusCode::NOT_FOUND)
+        .body(boxed(Full::from("404")))
+        .unwrap()
 }
