@@ -29,8 +29,6 @@ use tracing::{info, log::debug};
 
 #[cfg(unix)]
 use std::os::unix::fs::PermissionsExt;
-#[cfg(windows)]
-use std::os::windows::fs::PermissionsExt;
 
 #[derive(Clone)]
 struct AppState {
@@ -166,10 +164,9 @@ async fn download_youtube_dl(release: GitHubRelease) -> Result<(), Box<dyn Error
     let response = reqwest::get(url).await?;
     let mut file = File::create(get_youtube_dl_location())?;
     let mut permissions = file.metadata()?.permissions();
+    permissions.set_readonly(false);
     #[cfg(unix)]
     permissions.set_mode(0o755);
-    #[cfg(windows)]
-    permissions.set_readonly(false);
     file.set_permissions(permissions).ok();
     let mut content = Cursor::new(response.bytes().await?);
     std::io::copy(&mut content, &mut file)?;
