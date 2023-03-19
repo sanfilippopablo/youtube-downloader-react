@@ -32,6 +32,7 @@ jobs:
         with:
           node-version: 18
       - run: cd client && npm ci && npm run build
+      - run: cargo test -- --nocapture
       - run: cargo build --release
         working-directory: server
       # - run: dir server
