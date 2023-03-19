@@ -77,10 +77,24 @@ fn parse_status(line: &str) -> Option<DownloadStatus> {
     }
 }
 
-fn get_download_path(download_type: DownloadType) -> PathBuf {
+fn get_download_path_from_env(env_name: &str) -> PathBuf {
+    env::var(env_name)
+        .map(|val| PathBuf::from(val))
+        .unwrap_or_else(|_| {
+            let download_path = dirs::home_dir().unwrap();
+            tracing::info!(
+                "No {} provided. Using {:?} instead",
+                env_name,
+                download_path
+            );
+            download_path
+        })
+        .into()
+}
+pub fn get_download_path(download_type: DownloadType) -> PathBuf {
     match download_type {
-        DownloadType::Música => env::var("MUSICA_DOWNLOAD_PATH").unwrap().into(),
-        DownloadType::Mensaje => env::var("MENSAJES_DOWNLOAD_PATH").unwrap().into(),
+        DownloadType::Música => get_download_path_from_env("MUSICA_DOWNLOAD_PATH"),
+        DownloadType::Mensaje => get_download_path_from_env("MENSAJES_DOWNLOAD_PATH"),
     }
 }
 

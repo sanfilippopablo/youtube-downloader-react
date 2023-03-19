@@ -1,7 +1,9 @@
 use std::{env, path::PathBuf};
 
 use tokio::sync::broadcast::{self};
-use youtube_downloader::{download, update_youtube_dl, DownloadArgs, DownloadType};
+use youtube_downloader::{
+    download, get_download_path, update_youtube_dl, DownloadArgs, DownloadType,
+};
 
 #[tokio::test]
 async fn test_download() {
@@ -27,7 +29,7 @@ async fn test_download() {
 
     dbg!(updates);
 
-    let download_dir: PathBuf = env::var("MUSICA_DOWNLOAD_PATH").unwrap().into();
+    let download_dir: PathBuf = get_download_path(DownloadType::Música);
     let expected_download_path = download_dir.join("Marcos Vidal").join("Tu Cara.mp3");
     dbg!(&expected_download_path);
     assert!(expected_download_path.exists());
