@@ -285,6 +285,8 @@ pub fn download(args: DownloadArgs, tx: broadcast::Sender<DownloadUpdate>) {
 
         let executable = get_youtube_dl_location();
         let exec_args = [
+            "--encoding",
+            "utf-8",
             "--newline",
             "--verbose",
             "-x",
