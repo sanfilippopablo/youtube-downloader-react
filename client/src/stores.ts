@@ -1,7 +1,6 @@
 import { writable } from "svelte/store";
+import { HOST } from "./api";
 import { DownloadInput, DownloadState } from "./types";
-
-const HOST = "localhost:3200";
 
 function createDownloads() {
   const { subscribe, update } = writable<Map<string, DownloadState>>(new Map());

@@ -11,7 +11,9 @@ use rust_embed::RustEmbed;
 use std::{net::SocketAddr, sync::Arc};
 use tokio::sync::broadcast;
 use tower_http::cors::CorsLayer;
-use youtube_downloader::{download, update_youtube_dl, DownloadArgs, DownloadUpdate};
+use youtube_downloader::{
+    download, playlist::get_playlists, update_youtube_dl, DownloadArgs, DownloadUpdate,
+};
 
 #[derive(Clone)]
 struct AppState {
@@ -36,6 +38,7 @@ async fn main() {
     // build our application with a route
     let app = Router::new()
         .route("/api/download", post(download_handler))
+        .route("/api/playlists", get(get_playlists_handler))
         .route("/websocket", get(websocket_handler))
         .layer(CorsLayer::permissive())
         .with_state(app_state)
@@ -57,6 +60,10 @@ async fn download_handler(
     let tx = app_state.updates_channel.as_ref().clone();
     download(payload, tx);
     StatusCode::OK
+}
+
+async fn get_playlists_handler() -> Json<Vec<String>> {
+    Json(get_playlists())
 }
 
 async fn websocket_handler(

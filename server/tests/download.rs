@@ -1,5 +1,4 @@
-use std::{env, path::PathBuf};
-
+use std::path::PathBuf;
 use tokio::sync::broadcast::{self};
 use youtube_downloader::{
     download, get_download_path, update_youtube_dl, DownloadArgs, DownloadType,

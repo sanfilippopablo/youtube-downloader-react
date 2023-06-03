@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as yup from "yup";
+  import { HOST } from "./api";
   import ButtonToggle from "./ButtonToggle.svelte";
   import DownloadCard from "./DownloadCard.svelte";
   import { downloads } from "./stores";
@@ -31,6 +32,11 @@
       downloads.download(data);
     }
   }
+
+  let playlistsPromise = (async () =>
+    fetch(`http://${HOST}/api/playlists`).then((response) => response.json()))() as Promise<
+    Array<string>
+  >;
 
   $: console.log($downloads);
 </script>
@@ -94,12 +100,16 @@
     </div>
     <div>
       <h2 class="border-b font-medium text-lg mb-4">Opciones</h2>
-      <div class="flex gap-2 items-center text-l">
-        <input type="checkbox" id="addToNew" name="subscribe" value="newsletter" />
-        <label for="addToNew">
-          Agregar a lista de reproducción <em>Lo nuevo</em>
-        </label>
-      </div>
+      {#await playlistsPromise then playlists}
+        {#each playlists as playlist}
+          <div class="flex gap-2 items-center text-l">
+            <input type="checkbox" id="addToNew" name="subscribe" value="newsletter" />
+            <label for="addToNew">
+              Agregar a lista de reproducción <em>{playlist}</em>
+            </label>
+          </div>
+        {/each}
+      {/await}
     </div>
     <button
       class="bg-blue-500 text-white active:bg-purple-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

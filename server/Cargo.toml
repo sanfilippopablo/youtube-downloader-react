@@ -10,6 +10,7 @@ axum = { version = "0.6.10", features = ["ws"] }
 axum-macros = "0.3.5"
 dirs = "4.0.0"
 http = "0.2.9"
+m3u = "1.0.0"
 mime_guess = "2.0.4"
 regex = "1.7.1"
 reqwest = { version = "0.11.14", features = ["blocking", "json"] }

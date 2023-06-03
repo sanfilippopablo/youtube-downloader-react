@@ -1,3 +1,5 @@
+pub mod playlist;
+
 use std::{
     env,
     error::Error,
@@ -18,6 +20,8 @@ use tracing::{debug, info};
 
 #[cfg(unix)]
 use std::os::unix::fs::PermissionsExt;
+
+use crate::playlist::add_file_to_playlist;
 
 #[derive(Deserialize, Serialize, Clone, Debug)]
 enum DownloadStatus {
@@ -60,6 +64,7 @@ pub struct DownloadArgs {
     pub artist: String,
     pub title: String,
     pub cut: Option<CutOptions>,
+    pub add_to_playlists: Vec<String>,
 }
 
 fn parse_status(line: &str) -> Option<DownloadStatus> {
@@ -356,5 +361,17 @@ pub fn download(args: DownloadArgs, tx: broadcast::Sender<DownloadUpdate>) {
             status,
         })
         .ok();
+
+        for playlist in args.add_to_playlists {
+            add_file_to_playlist(
+                download_path
+                    .to_str()
+                    .unwrap()
+                    .to_string()
+                    .replace(".%(ext)s", ".mp3")
+                    .into(),
+                playlist,
+            )
+        }
     });
 }
