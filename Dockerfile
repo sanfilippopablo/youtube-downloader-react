@@ -1,20 +1,27 @@
-FROM node:16
+FROM node:20-slim AS client-build
 
 WORKDIR /app
 
-RUN apt update && apt install -y \
-    python3 \
-    python3-pip \
-    ffmpeg
+COPY client .
+RUN npm ci
+RUN npm run build
 
-RUN pip3 install -U youtube-dl
 
-COPY client client
+FROM rust:slim AS server-build
 
-RUN cd client && npm i && npm run build
+WORKDIR /app
 
-COPY server server
+COPY Cargo.toml .
+COPY Cargo.lock .
+COPY src src
+COPY --from=client-build /app/dist client/dist
+RUN apt update && apt install -y pkg-config openssl libssl-dev
+RUN cargo build --release
 
-RUN cd server && npm i
+FROM debian:12
 
-CMD cd server && npm run prod
+WORKDIR /app
+RUN apt update && apt install -y openssl libssl-dev ca-certificates
+COPY --from=server-build /app/target/release/youtube-downloader /app/youtube-downloader
+
+CMD ["/app/youtube-downloader"]

@@ -46,7 +46,7 @@ async fn main() {
 
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3200));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3200));
     tracing::info!("listening on {}", addr);
     let _server = axum::Server::bind(&addr)
         .serve(app.into_make_service())
@@ -89,7 +89,7 @@ async fn websocket(mut stream: WebSocket, state: AppState) {
 }
 
 #[derive(RustEmbed)]
-#[folder = "../client/dist"]
+#[folder = "client/dist"]
 struct Assets;
 
 async fn static_handler(uri: Uri) -> impl IntoResponse {
